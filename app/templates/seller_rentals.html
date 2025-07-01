@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rental Details</title>
+  <meta name="format-detection" content="telephone=no">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <link rel="icon" href="/static/img/favicon.png" type="image/x-icon"/>
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/themify-icons.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/zoa-font.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/font-family.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/slick.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/slick-theme.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/style-main.css">
+  <link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+</head>
+
+<body>
+
+{% include 'nav.html' %}
+
+<main>
+  <div class="banner margin_bottom_100">
+    <div class="container">
+      <h1 class="title-font title-banner">Rental History for Your Products</h1>
+      <ul class="breadcrumb des-font">
+        <li><a href="/">Home</a></li>
+        <li class="active">Seller Rentals</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container margin_bottom_150">
+    <div class="row justify-content-center">
+      <div class="col-lg-12">
+        <div class="card shadow-sm border-0">
+          <div class="card-body p-4">
+            {% if rentals %}
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead class="table-dark">
+                    <tr>
+                      <th>Renter</th>
+                      <th>Product</th>
+                      <th>Image</th>
+                      <th>Start</th>
+                      <th>End</th>
+                      <th>Days</th>
+                      <th>Total</th>
+                      <th>Status</th>
+                      <th>Booked On</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for rent in rentals %}
+                      <tr>
+                        <td>{{ rent.userid.id }}</td>
+                        <td>{{ rent.productid.id }}</td>
+                        <td>
+                          <img src="{{ rent.productid.pimage.url }}" width="80" class="rounded shadow-sm" alt="{{ rent.productid.name }}">
+                        </td>
+                        <td>{{ rent.start_date }}</td>
+                        <td>{{ rent.end_date }}</td>
+                        <td>{{ rent.total_days }}</td>
+                        <td>₹{{ rent.total_rent }}</td>
+                        <td>
+                          {% if rent.payment_status %}
+                            <span class="badge bg-success">Paid</span>
+                          {% else %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                          {% endif %}
+                        </td>
+                        <td>{{ rent.booking_date|date:"M d, Y H:i" }}</td>
+                      </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            {% else %}
+              <div class="alert alert-info text-center title-font">
+                No rental bookings found for your products.
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+</body>
+</html>

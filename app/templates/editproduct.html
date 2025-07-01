@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from landing.engotheme.com/html/nixx/demo/Home7.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2025 08:37:41 GMT -->
+<head>
+	<title>Home</title>
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="icon" href="static/img/favicon.png" type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/zoa-font.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/font-family.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/slick.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/jquery.fancybox.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/style-main.css">
+</head>
+<body>
+{% if messages %}
+{% for i in messages %}
+<script>alert("{{i}}");</script>
+{% endfor %}
+{% endif %}
+{% include 'nav.html' %}
+<main>
+ <div class="container my-5">
+    <div class="form-container">
+      <h3 class="text-center mb-4">Edit Product</h3>
+      <form method="post" action="/updateproductdata" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="productName" class="form-label">Product Name</label>
+          <input type="text" name="pname" value="{{ data.name }}" class="form-control" id="productName" placeholder="Enter product name" >
+			<br> <input type="hidden" name="pid" value="{{ data.id }}">
+        </div>
+
+         <div class="mb-3">
+        <label for="productCategory" class="form-label">Category</label>
+        <select class="form-select" id="productCategory" name="pcat">
+            <option value="">Select Category</option>
+            {% for i in category %}
+            <option value="{{ i.id }}" {% if data.catid.id == i.id %}selected{% endif %}>{{ i.catname }}</option>
+            {% endfor %}
+        </select>
+    </div>
+		  <div class="mb-3">
+          <label for="productcolor" class="form-label">Product color</label>
+          <input type="text" name="color" class="form-control" id="productcolor" value="{{data.pcolor}}" placeholder="Enter product color" >
+        </div>
+        <div class="mb-3">
+          <label for="productImage" class="form-label">Product Image</label>
+          <input type="file" name="pimage" class="form-control" id="productImage" accept="image/*" >
+			<br> <img src="/media/{{ data.pimage}}" height="200px" width="200px">
+        </div>
+        <div class="mb-3">
+          <label for="productPrice" class="form-label">Price</label>
+          <input type="number" name="price" value="{{ data.pprice }}" class="form-control" id="productPrice" placeholder="Enter product price" min="0" step="0.01" >
+        </div>
+		   <div class="mb-3">
+        <label for="productSize" class="form-label">Product Size</label>
+        <select name="size" id="productSize" class="form-select">
+            <option value="">Select Size</option>
+            <option value="S" {% if data.size == "S" %}selected{% endif %}>Small</option>
+            <option value="M" {% if data.size == "M" %}selected{% endif %}>Medium</option>
+            <option value="L" {% if data.size == "L" %}selected{% endif %}>Large</option>
+            <option value="XL" {% if data.size == "XL" %}selected{% endif %}>Extra Large</option>
+        </select>
+    </div>
+        <div class="mb-3">
+          <label for="productDescription" class="form-label">Description</label>
+          <textarea class="form-control" name="desc" id="productDescription" rows="4" placeholder="Enter product description" > {{ data.desc }}</textarea>
+        </div>
+       <div class="mb-5">
+        <label for="productStatus" class="form-label">Status</label>
+        <select name="status" class="form-control" id="productStatus">
+            <option value="">Select Status</option>
+            <option value="Available" {% if data.status == "Available" %}selected{% endif %}>Available</option>
+            <option value="Unavailable" {% if data.status == "Unavailable" %}selected{% endif %}>Unavailable</option>
+        </select>
+    </div>
+       <div class="d-grid">
+          <button type="submit" class="btn btn-primary">submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</main>
+<footer>
+	<div  class="contact-home1 space_top_100 space_bot_120 ver7">
+		<div class="container">
+		<div class="row">
+			<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-about-home1">
+				<h4 class="des-font space_bot_40 title-about-home1">About us</h4>
+				<p class="des-font space_bot_20 des-about-home1">Proin gravida nibh vel velit auctor aliqu. Aenean
+				sollicitudin, lorem.</p>
+				<p class="space_bot_30 location"><span class="ti-location-pin"></span><span> 531 West Avenue, NY</span></p>
+				<div class="space_bot_50">
+					<a href="#"><img src="static/img/img-footer-1.png" class="img-responsive" alt=""></a>
+				</div>
+
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 lastest-post">
+				<h4 class="des-font space_bot_40 title-about-home1 text-left">Lastest Post</h4>
+				<h5 class="title-font uppercase text-left"><a href="#">Your Personality Color</a></h5>
+					<p class="des-font space_bot_40 text-left">02/27/2018</p>
+				<h5 class="title-font uppercase text-left"><a href="#">Coat Materials for Winter</a></h5>
+					<p class="des-font space_bot_40 text-left">02/27/2018</p>
+				<h5 class="title-font uppercase text-left"><a href="#">Streetwear Outfit Ideas</a></h5>
+					<p class="des-font space_bot_40 text-left">02/27/2018</p>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 recent-tag">
+				<h4 class="des-font space_bot_40 title-about-home1">Recent Tags</h4>
+				<a href="#" class="uppercase des-font">abstract</a>
+				<a href="#" class="uppercase des-font">art</a>
+				<a href="#" class="uppercase des-font">blog</a>
+				<a href="#" class="uppercase des-font">exhibition</a>
+				<a href="#" class="uppercase des-font">event</a>
+				<a href="#" class="uppercase des-font">evening</a>
+				<a href="#" class="uppercase des-font">gym</a>
+				<a href="#" class="uppercase des-font">exhibition</a>
+				<a href="#" class="uppercase des-font">news</a>
+				<a href="#" class="uppercase des-font">people</a>
+				<a href="#" class="uppercase des-font">trends</a>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 instagram">
+				<h4 class="des-font space_bot_40 title-about-home1 capital">get our latest update in your email</h4>
+				<p class="des-font des-about space_bot_30">Subscribe now to get 15% off on any product</p>
+				<form class="form-group des-font" method="post" target="_blank">
+					<input type="email" name="EMAIL" class="form-control" placeholder="Your email goes here...">
+					<button type="submit" class="uppercase">subscribe</button>
+				</form>
+
+			</div>
+		</div>
+		</div>
+	</div>
+	<div class="container des-font text-center copyright">
+	<span class="space_top_bot_50">Copyright © 2018 EngoTheme. All rights reserved.</span>
+	</div>
+
+</footer>
+<div class="overlay"></div>
+	<div class="gotop text-center fade"><i class="ti-angle-up"></i></div>
+	<div class="form-search delay03 text-center">
+
+                        	<i class="ti-close" id="close-search"></i>
+                            <h3 class="text-center title-font">what are<br>your looking for ?</h3>
+                            <form method="get" action="https://landing.engotheme.com/search" role="search">
+                              <input type="text" class="form-control control-search des-font" value="" autocomplete="off" placeholder="Enter Search ..." aria-label="SEARCH" name="q">
+                              <button class="button_search title-font" type="submit">search</button>
+                            </form>
+
+	</div>
+	<div class="form-cart delay03">
+		<i class="ti-close" id="close-cart"></i>
+		<h3 class="title-font capital">my cart</h3>
+		<div class="empty-cart">
+			<p class="des-font">No products in the cart.</p>
+			<a href="#" class="capital des-font">start shopping</a>
+		</div>
+
+	</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="/static/js/jquery-3.3.1.min.js" defer=""></script>
+<script src="/static/js/bootstrap.min.js" defer=""></script>
+<script src="/static/js/slick.min.js" defer=""></script>
+<script src="/static/js/function-main.js" defer=""></script>
+<script src="/static/js/jquery.fancybox.min.js" defer=""></script>
+<script src="/static/js/responsive.js" defer=""></script>
+</body>
+
+<!-- Mirrored from landing.engotheme.com/html/nixx/demo/Home7.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2025 08:37:42 GMT -->
+</html>

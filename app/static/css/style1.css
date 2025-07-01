@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    }
+h1{
+    color: #000000;
+}
+main{
+    width: 100%;
+    height: 100%;
+    background-size: 100% 100%;
+
+}
+.container1{
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    margin-left:15%;
+    width: 70%;
+    position: relative;
+}
+.row{
+display:flex;
+flex-wrap: nowrap;
+justify-content:space-between;
+}
+.form-group{
+    height: 50px;
+}
+select{
+background:none;
+}
+input{
+    outline: none;
+    border: none;
+    background-color: transparent;
+    border-bottom: 2px solid #000000;
+    width: 100%;
+    position: relative;
+    top: 5px;
+}
+label{
+    position: relative;
+    font-size: 18px;
+    color: #000000;
+    top: 45px;
+    left: 5px;
+    transition: .5s;
+    z-index: -1;
+}
+label .icon-style{
+    position: absolute;
+    left: 230px;
+    font-size: 18px;
+}
+/*use in js*/
+.label-selected{
+    position: relative;
+    font-size: 13px;
+    color: #000000;
+    top:33px;
+    left: 5px;
+}
+.btn {
+    border: none;
+    background-color:black;
+    color:#FFFFFF;
+    font-weight: 500;
+    padding: 10px;
+    width: 100%;
+    border-radius: 30px;
+    transition: .5s;
+    transform: translate(0px, 0px);
+    margin-top: 35px;
+}
+.btn:hover{
+    box-shadow: 0 8px 15px -10px rgb(61, 61, 61), 0 16px 30px -5px rgb(61, 61, 61);
+    transform: translate(0px, -5px);
+    color: #808080;
+}
+.link{
+    font-size: 14px;
+    color: #000000;
+    margin-bottom:10px;
+
+
+}
+.d-flex{
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content:space-between;
+    margin-top:5px;
+}
+.link:hover{
+    color: #808080;
+}
+#overlay{
+    background-image: linear-gradient(180deg, #0b0706 0%, #684746 46%, #495050 70%, #33f7eb 200%);
+    box-shadow:0 0 5px #fbeaaa,
+               0 0 10px #fbeaaa,
+               0 0 20px #fbeaaa,
+               0 0 40px #fbeaaa,
+               0 0 80px #fbeaaa,
+               0 0 120px #fbeaaa;
+    transition: box-shadow 0.5s ease-in-out;
+    height: 650px;
+    width: 52%;
+    position: absolute;
+    transform: translate(0px, -25px);
+    border-radius: 25px;
+    transition: .5s;
+}
+#overlay img{
+    position: absolute;
+    width: 100%;
+    height: 650px;
+    border-radius: 25px;
+}
+}
+hr{
+    height:10px;
+    background-color:black;
+}
+button{
+    padding: 10px 20px;
+    margin:30px 0px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    letter-spacing: 1px;
+    cursor: pointer;
+    text-transform: capitalize;
+    left:140px;
+    bottom:45px;
+
+select-style

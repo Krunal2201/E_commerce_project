@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from landing.engotheme.com/html/nixx/demo/Product_detail_1.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2025 08:37:46 GMT -->
+<head>
+	<title>Product detail 01</title>
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="icon" href="/static/img/favicon.png" type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/zoa-font.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/font-family.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/slick.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/style-main.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+</head>
+<body>
+{% if messages %}
+{% for i in messages %}
+<script>alert("{{i}}");</script>
+{% endfor %}
+{% endif %}
+{% include 'nav.html' %}
+
+<main>
+  <div class="banner margin_bottom_100">
+    <div class="container">
+      <h1 class="title-font title-banner">Rent {{ product.name }}</h1>
+      <ul class="breadcrumb des-font">
+        <li><a href="/">Home</a></li>
+        <li class="active">Rent</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="container margin_bottom_150">
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form method="post" class="bg-light p-5 rounded shadow">
+          {% csrf_token %}
+          <input type="hidden" id="price_per_day" value="{{ product.prentprice }}">
+
+          <div class="mb-4">
+            <label for="rental_date" class="form-label title-font">Start Date:</label>
+            <input type="date" id="rental_date" name="start_date" class="form-control" required>
+          </div>
+
+          <div class="mb-4">
+            <label for="return_date" class="form-label title-font">End Date:</label>
+            <input type="date" id="return_date" name="end_date" class="form-control" required>
+          </div>
+
+          <div class="mb-4">
+              <p class="number-font fs-5">Rent Price per Day:RS.{{ product.prentprice }}</p>
+
+            <p class="number-font fs-5">security deposit : 50% of product price</p>
+            <p class="number-font fs-5">Total Rent:RS.<span id="total_cost">0</span></p>
+          </div>
+
+          <div class="text-end">
+            <button type="submit" class="btn btn-dark px-4 py-2 title-font">Confirm Rental</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const rentalDateInput = document.getElementById('rental_date');
+    const returnDateInput = document.getElementById('return_date');
+    const totalCostDisplay = document.getElementById('total_cost');
+    const pricePerDay = parseFloat(document.getElementById('price_per_day').value);
+
+    const today = new Date();
+    const tomorrow = new Date(today);
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    const yyyy = tomorrow.getFullYear();
+    const mm = String(tomorrow.getMonth() + 1).padStart(2, '0');
+    const dd = String(tomorrow.getDate()).padStart(2, '0');
+    const minRentalDate = `${yyyy}-${mm}-${dd}`;
+    rentalDateInput.setAttribute('min', minRentalDate);
+
+    rentalDateInput.addEventListener('change', function () {
+      const selectedRentalDate = new Date(this.value);
+      const nextDay = new Date(selectedRentalDate);
+      nextDay.setDate(nextDay.getDate() + 1);
+      const returnMin = `${nextDay.getFullYear()}-${String(nextDay.getMonth() + 1).padStart(2, '0')}-${String(nextDay.getDate()).padStart(2, '0')}`;
+      returnDateInput.setAttribute('min', returnMin);
+      returnDateInput.value = "";
+      calculateTotal();
+    });
+
+    returnDateInput.addEventListener('change', calculateTotal);
+
+    function calculateTotal() {
+      const rentalDate = new Date(rentalDateInput.value);
+      const returnDate = new Date(returnDateInput.value);
+
+      if (rentalDate && returnDate && returnDate > rentalDate) {
+        const days = Math.floor((returnDate - rentalDate) / (1000 * 60 * 60 * 24));
+        const total = pricePerDay * days + ( pricePerDay * 5) ;
+        totalCostDisplay.textContent = total;
+      } else {
+        totalCostDisplay.textContent = 0;
+      }
+    }
+  });
+</script>
+
+</body>
+</html>

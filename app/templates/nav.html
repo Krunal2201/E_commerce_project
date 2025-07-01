@@ -1,0 +1,133 @@
+	<!-- push menu-->
+    <div class="pushmenu menu-home5">
+        <div class="menu-push">
+            <span class="close-left js-close"><i class="ti-close"></i></span>
+            <div class="clearfix"></div>
+            <form role="search" method="get" id="searchform" class="searchform title-font" action="https://landing.engotheme.com/search">
+                <div>
+                    <label class="screen-reader-text" for="q"></label>
+                    <input type="text" placeholder="Search for products" value="" name="q" id="q" autocomplete="off">
+                    <input type="hidden" name="type" value="product">
+                    <button type="submit" id="searchsubmit"><i class="ti-search"></i></button>
+                </div>
+            </form>
+            <ul class="nav-home5 js-menubar clear-space menu-font">
+                <li class="level1 active dropdown">
+                    <a href="#" class="uppercase">Home</a>
+                    <span class="icon-sub-menu"></span>
+                </li>
+                <li class="level1">
+                    <a href="contact" class="uppercase">contact</a>
+                </li>
+                <li class="level1">
+                    <a href="/addproduct" class="uppercase">Add Product</a>
+                </li>
+				{% if request.session.log_name %}
+				<li class="level1">
+                    <a href="/login" class="uppercase">Login</a>
+                </li>
+				{% else %}
+				<li class="level1">
+                    <a href="/" class="uppercase">Logout</a>
+                </li>
+				{% endif %}
+            </ul>
+        </div>
+    </div>
+    <!-- end push menu-->
+<header>
+	<div class="container space_top_bot_55 delay03" id="menu-header">
+		<div class="row flex">
+			<div class="col-lg-1 col-md-2 col-sm-6 col-xs-5">
+				<a href="#"><img src="../static/img/logo.png" alt=""></a>
+			</div>
+			<div class="col-lg-8 col-md-7 hidden-sm hidden-xs">
+				<ul class="nav navbar-nav menu-font menu-main">
+					<li class="relative dropdown">
+						<a href="/" class="link-menu delay03 uppercase">HOME</a>
+						<figure class="line absolute delay03"></figure>
+					</li>
+					{% if request.session.log_name %}
+					{% if request.session.log_role == "user"%}
+					<li class="relative dropdown">
+						<a href="/my-rentals" class="link-menu delay03 uppercase">Rent History</a>
+						<figure class="line absolute delay03"></figure>
+					</li>
+					<li class="relative">
+						<a href="yourorder" class="link-menu delay03 uppercase">Your orders</a>
+						<figure class="line absolute delay03"></figure>
+					</li>
+					{% endif %}
+					{% endif %}
+					<li class="relative dropdown">
+						<a href="#" class="link-menu delay03 uppercase">Category</a>
+						<figure class="line absolute delay03"></figure>
+						<div class="dropdown-menu mega-menu-main absolute space_30 space_top_bot_50 text-center">
+							<div class="container_15">
+								<div class="row">
+										<ul class="clear-space capital lv1">
+											{% for i in category %}
+											<li class="menu-child-font"><a href="/categoryviseproduct/{{ i.id }}">{{ i.catname }}</a></li>
+											{% endfor %}
+										</ul>
+								</div>
+							</div>
+						</div>
+					</li>
+					{% if request.session.log_name %}
+					{% if request.session.log_role == "seller" %}
+					<li class="relative">
+						<a href="/addproduct" class="link-menu delay03 uppercase">add product</a>
+						<figure class="line absolute delay03"></figure>
+					</li>
+					<li class="relative">
+						<a href="/sellershoworder" class="link-menu delay03 uppercase">manage order</a>
+						<figure class="line absolute delay03"></figure>
+					</li>
+<!--					<li class="relative">-->
+<!--						<a href="/sellershowrentorder" class="link-menu delay03 uppercase">manage rent order</a>-->
+<!--						<figure class="line absolute delay03"></figure>-->
+<!--					</li>-->
+					<li class="relative">
+						<a href="/manageproduct" class="link-menu delay03 uppercase">manage product</a>
+						<figure class="line absolute delay03"></figure>
+					</li>
+					<li class="relative">
+						<a href="/seller_rentals" class="link-menu delay03 uppercase">Rent Details</a>
+						<figure class="line absolute delay03"></figure>
+					</li>
+					{% endif %}
+					<li class="relative">
+						<a href="/logout" class="link-menu delay03 uppercase">Logout</a>
+						<figure class="line absolute delay03"></figure>
+					</li>
+					{% else %}
+					<li class="relative">
+						<a href="/login" class="link-menu delay03 uppercase">Login</a>
+						<figure class="line absolute delay03"></figure>
+					</li>
+					 {% endif %}
+				</ul>
+			</div>
+			<div class="col-lg-3 col-md-3 col-sm-6 col-xs-7 text-right icon-main">
+				<a href="/profile" class="link-menu delay03 container_20 inline-block hidden-xs hidden-sm" id="btn-login"><i class="zoa-icon-user"></i></a>
+				{% if request.session.log_name %}
+				{% if request.session.log_role == "user" %}
+				<a href="/showcart" class="link-menu delay03 container_20 relative inline-block text-center" id="btn-cart">
+					<i class="ti-bag"></i>
+				</a>
+				{% endif %}
+				{% endif %}
+				<a href="#" class="link-menu delay03 inline-block hidden-md hidden-lg space_left_10 btn-push-menu">
+					<svg width="26" height="16" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 66 41" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve">
+                                    <g>
+                                        <line class="st0" x1="1.5" y1="1.5" x2="64.5" y2="1.5"></line>
+                                        <line class="st0" x1="1.5" y1="20.5" x2="64.5" y2="20.5"></line>
+                                        <line class="st0" x1="1.5" y1="39.5" x2="64.5" y2="39.5"></line>
+                                    </g>
+                   </svg>
+				</a>
+			</div>
+		</div>
+	</div>
+</header>

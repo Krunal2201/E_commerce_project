@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from landing.engotheme.com/html/nixx/demo/Product_detail_1.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2025 08:37:46 GMT -->
+<head>
+	<title>Product detail 01</title>
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="icon" href="/static/img/favicon.png" type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/zoa-font.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/font-family.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/slick.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/style-main.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+</head>
+<body>
+<!--header-->
+{% include 'nav.html' %}
+<!---->
+<main>
+<div class="banner margin_bottom_100">
+	<div class="container">
+		<h1 class="title-font title-banner banner-product-detail">Add to cart</h1>
+		<ul class="breadcrumb des-font">
+			<li><a href="Home1.html">Home</a></li>
+		</ul>
+	</div>
+</div>
+<!--  -->
+	<!--  -->
+<div class="container product-detail margin_bottom_100">
+	<div class="row">
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 margin_bottom_50">
+			<div class="slick-product-detail margin_bottom_20">
+				<div>
+					<img src="/media/{{data.pimage}}" class="img-responsive h-75 w-50" alt="">
+				</div>
+<!--				<div>-->
+<!--					<img src="static/img/product-detail-2.jpg" class="img-responsive full-width" alt="">-->
+<!--				</div>-->
+<!--				<div>-->
+<!--					<img src="static/img/product-detail-3.jpg" class="img-responsive full-width" alt="">-->
+<!--				</div>-->
+				
+			</div>
+<!--			<div class="slick-nav-product-detail">-->
+<!--				<div>-->
+<!--					<img src="static/img/product-detail-nav-2.jpg" class="img-responsive" alt="">-->
+<!--				</div>-->
+<!--				<div>-->
+<!--					<img src="static/img/product-detail-nav-1.jpg" class="img-responsive" alt="">-->
+<!--				</div>-->
+<!--				<div>-->
+<!--					<img src="static/img/product-detail-nav-3.jpg" class="img-responsive" alt="">-->
+<!--				</div>-->
+<!--				-->
+<!--			</div>-->
+		</div>
+		<div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 info-product-detail">
+			<h4 class="des-font capital title-product space_top_20">{{ data.name }}</h4>
+			<h4 class="des-font des-product space_top_10">{{ data.desc }}</h4>
+			<h2 class="number-font price-product space_top_10"><span class="price">RS. {{ data.pprice }}</span></h2>
+			<h4 class="des-font des-product space_top_10"><span class="color">Color:{{ data.pcolor }}</span></h4>
+			<h4 class="des-font des-product space_top_10"><span class="color">Size: {{ data.size }}</span></h4>
+			<form method="POST" action="/insertintocart">
+				{% csrf_token %}
+			<div class="flex margin_bottom_50 border-bot space_bot_50 btn-function">
+				<div class="input-number-group">
+                            <div class="relative input-number-custom">
+                            <div class="input-group-button absolute down-btn">
+                                <span class="input-number-decrement ti-angle-down"></span>
+                            </div>
+                              <input class="input-number menu-font" type="number" name="quantity" min="0" max="1000" value="1" >
+                            <div class="input-group-button absolute up-btn">
+                                <span class="input-number-increment ti-angle-up"></span>
+                            </div>
+                            </div>
+                        </div>
+								<input type="hidden" name="pid" value="{{ data.id }}" />
+								<input type="hidden" name="price" value="{{ data.pprice }}" />
+								<input type="hidden" name="id" value="" />
+  							  <button type="submit" name="add" class="enj-add-to-cart-btn des-font uppercase">add to cart</button>
+  				<a href="#" class="icon-heart"><i class="ti-heart"></i></a>
+  				<a href="#" class="engoj_btn_quickview icon-quickview" title="quickview">
+      				<i class="ti-more-alt"></i>
+      			</a>
+			</div>
+			<div>
+				<h2 class="number-font price-product space_top_10"><span class="price">Rent RS. {{ data.prentprice }}/Day</span></h2>
+				<a class="btn btn-primary" href="{% url 'rent_product' data.id %}" >Rent Now</a>
+			  </div>
+				</form>
+			<div class="inline-block border-bot">
+			<div class="info-more">
+				<p class="des-font margin_bottom_30 margin_top_50"><span class="menu-font">SKU:</span> N/A</p>
+				<p class="margin_bottom_30">
+					<span class="menu-font margin_right_10">Categories:</span>
+					<a href="#" class="delay03 margin_right_10">Bag,</a>
+					<a href="#" class="delay03 margin_right_10">Women,</a>
+					<a href="#" class="delay03 margin_right_10">New Arrival</a>
+				</p>
+				<p class="margin_bottom_30">
+					<span class="menu-font margin_right_30">Share:</span>
+					<a href="#" class="delay03 margin_right_30"><i class="ti-facebook"></i></a>
+					<a href="#" class="delay03 margin_right_30"><i class="ti-twitter-alt"></i></a>
+					<a href="#" class="delay03 margin_right_30"><i class="ti-pinterest"></i></a>
+					<a href="#" class="delay03 margin_right_30"><i class="ti-linkedin"></i></a>
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+	<!--  -->
+	
+	<!--  -->
+	
+	<!--  -->
+	
+	<!--  -->
+	<div class="container margin_bottom_130 section-bestseller-home1">
+		<div class="row">
+			<div class="col-md-12">
+				<h1 class="title-font margin_bottom_10 title-bestseller">Related products</h1>
+				<p class="des-font margin_bottom_50 des-bestseller">I did not even know that there were any better conditions to escape to, but I was more than willing 
+					to take my chances among people fashioned after.</p>
+			<div class="slick-bestseller">
+				{% for i in product %}
+				<div class="product">
+					<div class="img-product relative">
+						<a href="/product1/{{i.id}}"><img src="/media/{{ i.pimage }}" class="img-responsive" alt=""></a>
+						<figure class="absolute uppercase label-new title-font text-center">new</figure>
+						<div class="product-icon text-center absolute">
+							<form method="post" action="https://landing.engotheme.com/cart/add" enctype="multipart/form-data" class="inline-block icon-addcart">
+  							  <input type="hidden" name="id" value="" />
+  							  <button type="submit" name="add" class="enj-add-to-cart-btn btn-default"><i class="ti-bag"></i></button>
+  							</form>
+  							<a href="#" class="icon-heart inline-block"><i class="ti-heart"></i></a>
+  							<a href="#" class="engoj_btn_quickview icon-quickview inline-block" title="quickview">
+      						  <i class="ti-more-alt"></i>
+      						</a>
+						</div>
+					</div>
+					<div class="info-product text-center">
+						<h4 class="des-font capital title-product space_top_20"><a href="#">{{i.name}}</a></h4>
+						<p class="number-font price-product"><span class="price">RS{{i.pprice}}</span></p>
+
+					</div>
+
+				</div>
+				{% endfor %}
+				<!--  -->
+			</div>
+			
+			</div>
+		</div>
+	</div>
+	<!--  -->
+	<div class="newsletter-home3 space_bot_150 space_top_130 BG margin_bottom_120">
+		<h1 class="title-font capital title-newsletter text-center">Get Our Latest Update In Your Email</h1>
+		<p class="des-font des-newsletter space_bot_60 text-center">Subscribe now to get 15% off on any product</p>
+		<form class="form-group des-font flex" method="post" target="_blank">
+					<input type="email" name="EMAIL" class="form-control" placeholder="Your email address...">
+					<button type="submit" class="menu-font uppercase">subscribe</button>
+		</form>
+	</div>
+<!--  -->
+	
+</main>
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 space_bot_40 logo-footer-home2">
+
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left logo-footer clear-space-left">
+					<a href="#" class="inline-block"><img src="static/img/logo.png" class="img-responsive" alt=""></a>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right newsletter clear-space-right">
+					<a href="#" class="des-font delay03 inline-block"><span>Sign up your newsletter</span> <i class="ti-instagram delay03"></i></a>
+				</div>
+				
+			</div>
+			<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 space_bot_40 copy-footer-home2">
+
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-left copy clear-space">
+					<p class="des-font copy-text space_top_40">Copyright © 2018 EngoTheme. All rights reserved.</p>
+				</div>
+				<div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 text-right social-footer clear-space">
+					<div class="social-home2 space_top_40">
+					<a href="#" class="delay03 inline-block space_left_40"><i class="ti-facebook delay03"></i></a>
+					<a href="#" class="delay03 inline-block space_left_40"><i class="ti-twitter-alt delay03"></i></a>
+					<a href="#" class="delay03 inline-block space_left_40"><i class="ti-pinterest delay03"></i></a>
+					<a href="#" class="delay03 inline-block space_left_40"><i class="ti-linkedin delay03"></i></a>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+	
+</footer>
+<div class="overlay"></div>
+	<div class="gotop text-center fade"><i class="ti-angle-up"></i></div>
+	<div class="form-search delay03 text-center">
+						
+                        	<i class="ti-close" id="close-search"></i>
+                            <h3 class="text-center title-font">what are<br>your looking for ?</h3>
+                            <form method="get" action="https://landing.engotheme.com/search" role="search">
+                              <input type="text" class="form-control control-search des-font" value="" autocomplete="off" placeholder="Enter Search ..." aria-label="SEARCH" name="q">
+                              <button class="button_search title-font" type="submit">search</button>
+                            </form>
+                        
+	</div>
+	<div class="form-cart delay03">
+		<i class="ti-close" id="close-cart"></i>
+		<h3 class="title-font capital">my cart</h3>
+		<div class="empty-cart">
+			<p class="des-font">No products in the cart.</p>
+			<a href="#" class="capital des-font">start shopping</a>
+		</div>
+		
+	</div>
+</body>
+<script src="/static/js/jquery-3.3.1.min.js" defer=""></script>
+<script src="/static/js/bootstrap.min.js" defer=""></script>
+<script src="/static/js/slick.min.js" defer=""></script>
+<script src="/static/js/function-main.js" defer=""></script>
+<script src="/static/js/function-select-custom.js" defer=""></script>
+<script src="/static/js/function-input-number.js" defer=""></script>
+<script src="static/js/responsive.js" defer=""></script>
+</body>
+
+<!-- Mirrored from landing.engotheme.com/html/nixx/demo/Product_detail_1.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2025 08:37:48 GMT -->
+</html>

@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+<!-- Mirrored from landing.engotheme.com/html/nixx/demo/Product_detail_1.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 10 Jan 2025 08:37:46 GMT -->
+<head>
+	<title>Product detail 01</title>
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+	<link rel="icon" href="/static/img/favicon.png" type="image/x-icon"/>
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/themify-icons.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/zoa-font.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/font-family.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/slick.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/style-main.css">
+	<link rel="stylesheet" type="text/css" href="/static/css/responsive.css">
+</head>
+<body>
+
+{% include 'nav.html' %}
+
+<main>
+  <div class="banner margin_bottom_90">
+    <div class="container">
+      <h1 class="title-font title-banner">Rental Summary</h1>
+      <ul class="breadcrumb des-font">
+        <li><a href="/">Home</a></li>
+        <li class="active">Summary</li>
+      </ul>
+    </div>
+  </div>
+<div class="container">
+<div class="table-responsive">
+    <h4 class="title-font mb-4">Rental Details</h4>
+    <table class="table cart-table">
+        <thead>
+            <tr class="number-font">
+                <th class="product-thumbnail uppercase">Product</th>
+                <th class="product-date uppercase">Start Date</th>
+                <th class="product-date uppercase">End Date</th>
+                <th class="product-days uppercase">Total Days</th>
+                <th class="product-subtotal uppercase">Total amount</th>
+				<th class="product-status uppercase">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr class="item_cart">
+                    <td class="product">
+                        <div class="product-info">
+                            <p class="name-font margin_top_20">{{ rent.productid.name }}</p>
+                        </div>
+                    </td>
+					<td>
+                        <p class="date date-font">{{ rent.start_date }}</p>
+                    </td>
+					<td>
+                        <p class="date date-font">{{ rent.end_date }}</p>
+                    </td>
+                    <td>
+                        <p class="day number-font">{{ rent.total_days }}</p>
+                    </td>
+					<td>
+                        <p class="subtotal number-font">{{ rent.total_rent }}</p>
+                    </td>
+                    <td class="status">
+                        {% if rent.payment_status %}
+                            <span class="badge bg-success">Paid</span>
+                          {% else %}
+                            <span class="badge bg-warning text-dark">Pending</span>
+                          {% endif %}
+                    </td>
+                    <td>
+                     {% if not rent.payment_status %}
+              <a href="{% url 'rental_payment' rent.id %}" class="btn btn-dark title-font">Proceed to Pay</a>
+
+            {% else %}
+              <div class="alert alert-success title-font">Payment Completed</div>
+            {% endif %}
+                    </td>
+                </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+</main>
+</body>
+</html>
